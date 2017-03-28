@@ -1,5 +1,6 @@
 package org.bakesale.addresses.implementation;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,9 +46,26 @@ public class AddressDatabase {
     }
     
     public String getAllAddresses() throws Exception {
-    	String selectSql = "SELECT * FROM ADDRESSES_TABLE";
-    	dbConnector.doSelect(selectSql);
-        return new Gson().toJson(addresses);
+    	String selectSql = "SELECT * FROM ADDRESSES_DATA";
+    	ResultSet resultSet = dbConnector.doSelect(selectSql);
+    	
+    	List<AddressEntry> entries = new ArrayList<AddressEntry>();
+    	
+    	while (resultSet.next())
+    	{
+    		AddressEntry entry = new AddressEntry(resultSet.getInt("ID"),
+    				resultSet.getString("NAME"),
+    				resultSet.getString("EMAIL"),
+    				resultSet.getString("TELEPHONE"),
+    				resultSet.getString("ADDR_STREET"),
+    				resultSet.getString("ADDR_CITY"),
+    				resultSet.getString("ADDR_STATE"),
+    				resultSet.getString("ADDR_ZIP"));
+
+    		entries.add(entry);
+    		
+    	}
+        return new Gson().toJson(entries);
     }
     
 }

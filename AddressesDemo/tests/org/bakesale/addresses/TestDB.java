@@ -1,5 +1,6 @@
 package org.bakesale.addresses;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,8 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.bakesale.addresses.contract.PostgreSQLDBConnector;
-import org.bakesale.addresses.implementation.AddressDatabase;
 import org.bakesale.addresses.implementation.DbConnectionInfo;
 import org.junit.After;
 import org.junit.Before;

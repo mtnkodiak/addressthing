@@ -7,7 +7,7 @@ package org.bakesale.addresses.implementation;
  */
 public class AddressEntry {
 
-	private String id;
+	private int id;
 	private String name;
 	private String email;
 	private String telephone;
@@ -16,7 +16,7 @@ public class AddressEntry {
 	private String addrState;
 	private String zipcode;
 	
-	public AddressEntry(String id, String name, String email, String telephone, String addrStreet, String addrCity, String addrState, String zipcode)
+	public AddressEntry(int id, String name, String email, String telephone, String addrStreet, String addrCity, String addrState, String zipcode)
 	{
 		this.id = id;
 		this.name = name;
@@ -69,10 +69,10 @@ public class AddressEntry {
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	

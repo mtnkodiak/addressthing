@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.bakesale.addresses.implementation.AddressDatabase;
 import org.junit.Test;
 
-public class TestDBConnector {
+public class TestAddressDatabase {
 
 	@Test 
 	public void testAddressDatabaseGetAllAddresses() throws Exception

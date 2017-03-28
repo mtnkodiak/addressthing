@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<script src="jquery-3.2.0.min.js"></script>
+<title>Addresses Database</title>
 </head>
 <body>
 <h1>Addresses coding assignment for Kenzan</h1>

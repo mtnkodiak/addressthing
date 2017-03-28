@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.bakesale.addresses.implementation.AddressEntry;
-
+@Deprecated
 public class AddressesServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

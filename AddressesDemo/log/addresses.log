@@ -1,1 +1,1 @@
-[1] [03/28/17-11:50:21.375]   INFO {org.bakesale.addresses.implementation.PostgreSQLDBConnectorImpl::connect}: new connection to jdbc:postgresql://localhost:5432/addresses
+[1] [03/28/17-14:09:23.682]   INFO {org.bakesale.addresses.implementation.PostgreSQLDBConnectorImpl::connect}: new connection to jdbc:postgresql://localhost:5432/addresses

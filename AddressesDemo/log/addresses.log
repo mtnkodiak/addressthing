@@ -1,0 +1,2 @@
+[1] [03/28/17-09:50:06.940]   INFO {org.bakesale.addresses.implementation.PostgreSQLDBConnectorImpl::connect}: new connection to jdbc:postgresql://localhost:8080/addresses
+[1] [03/28/17-09:50:07.012]  ERROR {org.bakesale.addresses.implementation.PostgreSQLDBConnectorImpl::connect}: error.  Session setup failed.

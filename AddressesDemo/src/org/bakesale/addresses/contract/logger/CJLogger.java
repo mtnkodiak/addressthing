@@ -2,7 +2,7 @@ package org.bakesale.addresses.contract.logger;
 
 public interface CJLogger {
 
-	void initialize(String logPath) throws Exception;
+	void initialize(String logPath);
 	
     /**
      * Log error event.

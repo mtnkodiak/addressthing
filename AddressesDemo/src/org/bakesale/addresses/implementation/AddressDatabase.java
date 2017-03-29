@@ -24,7 +24,7 @@ public class AddressDatabase {
     // Singleton methods
     private static AddressDatabase dbInstance = null;
     
-    protected AddressDatabase() throws Exception {
+    protected AddressDatabase() throws ClassNotFoundException {
     	logger = new CJLoggerImpl();
     	logger.initialize("./log");
         addresses = new ArrayList<>();
@@ -32,7 +32,7 @@ public class AddressDatabase {
         dbConnector.setConnectionInfo("localhost", DbConnectionInfo.PORT, DbConnectionInfo.USERNAME, DbConnectionInfo.PASSWORD);
     }
     
-    public static AddressDatabase getInstance() throws Exception {
+    public static AddressDatabase getInstance() throws ClassNotFoundException  {
        if(dbInstance == null) {
           dbInstance = new AddressDatabase();
        }
@@ -45,7 +45,7 @@ public class AddressDatabase {
         addresses.addAll(addresses);
     }
     
-    public String getAllAddresses() throws Exception {
+    public List<AddressEntry> getAllAddresses() throws Exception {
     	String selectSql = "SELECT * FROM ADDRESSES_DATA";
     	ResultSet resultSet = dbConnector.doSelect(selectSql);
     	
@@ -65,7 +65,8 @@ public class AddressDatabase {
     		entries.add(entry);
     		
     	}
-        return new Gson().toJson(entries);
+    	
+    	return entries;
     }
     
 }

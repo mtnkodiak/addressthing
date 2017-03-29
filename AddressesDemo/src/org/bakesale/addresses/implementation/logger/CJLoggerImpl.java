@@ -3,6 +3,7 @@ package org.bakesale.addresses.implementation.logger;
 import org.bakesale.addresses.contract.logger.CJLogger;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
@@ -19,7 +20,7 @@ public class CJLoggerImpl implements CJLogger
     private Logger logger;
     private LogRecordFactory logRecordFactory;
 
-    public CJLoggerImpl() throws Exception
+    public CJLoggerImpl()
     {
         this.logRecordFactory = new LogRecordFactory();
         
@@ -41,7 +42,7 @@ public class CJLoggerImpl implements CJLogger
 	 * or similar method.
      */
     @Override
-    public void initialize(String logPath) throws Exception
+    public void initialize(String logPath)
     {
     	// Using the raw java.util.logger (and not this class until initialization is complete)
         logger.log(Level.INFO, "initialize, path=" + logPath );
@@ -55,12 +56,11 @@ public class CJLoggerImpl implements CJLogger
         		this.addFileHandler( logPath );
         	}
         }
-        catch (Exception cause)
+        catch (IOException | SecurityException cause)
         {
         	// NOTE: Our logger failed to create so use the raw java.util.logger
         	logger.log(Level.SEVERE, cause.getMessage());
             
-        	throw cause;
         }
     }
     
@@ -141,8 +141,7 @@ public class CJLoggerImpl implements CJLogger
     }
     
 
-    private void addFileHandler(String logPath)
-    throws Exception
+    private void addFileHandler(String logPath) throws SecurityException, IOException
     {
     	// first the console handler
     	VpConsoleHandler newHandler = new VpConsoleHandler();

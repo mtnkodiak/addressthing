@@ -46,7 +46,7 @@ public class PostgreSQLDBConnectorImpl implements PostgreSQLDBConnector
 	private static Object oneConnectionActionLock = new Object();
 	private static Connection dbConnection = null;
 	
-	public PostgreSQLDBConnectorImpl(CJLogger logger) throws Exception
+	public PostgreSQLDBConnectorImpl(CJLogger logger) throws ClassNotFoundException
 	{		
 		this.logger = logger;
 		
@@ -54,7 +54,7 @@ public class PostgreSQLDBConnectorImpl implements PostgreSQLDBConnector
 		{
 			Class.forName( "org.postgresql.Driver" );
 		}
-		catch( Exception exception1 )
+		catch( ClassNotFoundException exception1 )
 		{
 			String errorMsg = "DbConnectorPostgreSQLImpl(): initialization failure " + exception1.getMessage();
 			logger.error(errorMsg);

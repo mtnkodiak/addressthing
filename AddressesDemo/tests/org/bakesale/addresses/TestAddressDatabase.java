@@ -2,7 +2,10 @@ package org.bakesale.addresses;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.bakesale.addresses.implementation.AddressDatabase;
+import org.bakesale.addresses.implementation.AddressEntry;
 import org.junit.Test;
 
 public class TestAddressDatabase {
@@ -11,7 +14,7 @@ public class TestAddressDatabase {
 	public void testAddressDatabaseGetAllAddresses() throws Exception
 	{
 			AddressDatabase database = AddressDatabase.getInstance();
-			String something = database.getAllAddresses();
+			List<AddressEntry> something = database.getAllAddresses();
 			assertTrue(something != null);
 	}
 

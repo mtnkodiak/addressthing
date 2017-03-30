@@ -69,4 +69,15 @@ public class AddressDatabase {
     	return entries;
     }
     
+    public boolean deleteAddress(int index) throws Exception
+    {
+    	boolean success = true;
+    	
+       	String deleteSql = "DELETE FROM ADDRESSES_DATA WHERE id=" + index;
+    	dbConnector.doDelete(deleteSql);
+
+    	
+    	return success;
+    }
+    
 }

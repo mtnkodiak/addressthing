@@ -15,8 +15,8 @@
 <body>
 <h1>Addresses coding assignment for Kenzan</h1>
 
-<h1>Address List</h1>
-<table width="600" id="address_table">
+<h2>Address List:</h2>
+<table id="address_table">
   <tr>
     <td><strong>ID</strong></td>
     <td><strong>Name</strong></td>
@@ -25,19 +25,38 @@
   </tr>  
 </table>
 
+<br>
+<br>
 
+<h2>Add New Entry:</h2>
 <form id="contacts-form">
     <div class="item text">
-        <label>First name:</label>
-        <div class="field"><input type="text" name="first_name" /></div>
-    </div>
-    <div class="item text">
-        <label>Last name:</label>
-        <div class="field"><input type="text" name="last_name" /></div>
+        <label>Name:</label>
+        <div class="field"><input type="text" name="name" /></div>
     </div>
     <div class="item text">
         <label>Email:</label>
         <div class="field"><input type="text" name="email" /></div>
+    </div>
+    <div class="item text">
+        <label>Telephone:</label>
+        <div class="field"><input type="text" name="telephone" /></div>
+    </div>
+    <div class="item text">
+        <label>Street:</label>
+        <div class="field"><input type="text" name="street" /></div>
+    </div>
+    <div class="item text">
+        <label>City:</label>
+        <div class="field"><input type="text" name="city" /></div>
+    </div>
+    <div class="item text">
+        <label>State:</label>
+        <div class="field"><input type="text" name="state" /></div>
+    </div>
+    <div class="item text">
+        <label>ZipCode:</label>
+        <div class="field"><input type="text" name="zipcode" /></div>
     </div>
     <div class="button-wrapper">
         <div class="item button">

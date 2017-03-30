@@ -24,13 +24,13 @@ import com.google.gson.Gson;
 public class AddressesServletNew extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private static final String CREATE_ADDRESS = "createAddress";
+	private static final String CREATE_ADDRESS = "\"createAddress\"";
 
 	private static final String LIST_ADDRESSES = "\"listAddresses\""; //TODO: why the extra quotes?
 
-	private static final String UPDATE_ADDRESS = "updateAddress";
+	private static final String UPDATE_ADDRESS = "\"updateAddress\"";
 
-	private static final String DELETE_ADDRESS = "deleteAddress";
+	private static final String DELETE_ADDRESS = "\"deleteAddress\"";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -49,7 +49,7 @@ public class AddressesServletNew extends HttpServlet {
 		
 		try {
 			processRequest(request, response);
-		} catch (ClassNotFoundException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
@@ -71,13 +71,13 @@ public class AddressesServletNew extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			processRequest(request, response);
-		} catch (ClassNotFoundException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	private void processRequest(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ClassNotFoundException {
+			throws NumberFormatException, Exception {
 
 		response.setContentType("application/json");
 
@@ -110,10 +110,18 @@ public class AddressesServletNew extends HttpServlet {
 
 	}
 
-	private void deleteAddress(HttpServletRequest request, HttpServletResponse response) {
+	private void deleteAddress(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, Exception {
 
-		// TODO Auto-generated method stub
-
+		// get database.
+		AddressDatabase addressDatabase;
+		BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+		String id = request.getParameter("id");
+		try {
+			addressDatabase = AddressDatabase.getInstance();
+			addressDatabase.deleteAddress(Integer.parseInt(id));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void updateAddress(HttpServletRequest request, HttpServletResponse response) {

@@ -110,11 +110,30 @@ public class AddressesServletNew extends HttpServlet {
 
 	}
 
+	private void getAddress(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, Exception {
+		AddressEntry address;
+		String addressInJson;
+
+		String id = request.getParameter("id");
+		
+		// get address from database, and write the jsonized string to the response
+		AddressDatabase addressDatabase;
+		try {
+			addressDatabase = AddressDatabase.getInstance();
+			address = addressDatabase.getAddress(Integer.parseInt(id));
+			addressInJson = new Gson().toJson(address);
+			response.getWriter().write(addressInJson);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+
+	}
+	
 	private void deleteAddress(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, Exception {
 
 		// get database.
 		AddressDatabase addressDatabase;
-		BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
 		String id = request.getParameter("id");
 		try {
 			addressDatabase = AddressDatabase.getInstance();
@@ -127,7 +146,28 @@ public class AddressesServletNew extends HttpServlet {
 	}
 
 	private void updateAddress(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+
+		//update an existing record with new values.
+		// get database.
+		AddressDatabase addressDatabase;
+		String id = new Gson().fromJson(request.getParameter("id"), String.class);
+		String newName = new Gson().fromJson(request.getParameter("newName"), String.class);
+		String newEmail = new Gson().fromJson(request.getParameter("newEmail"), String.class);
+		String newTele = new Gson().fromJson(request.getParameter("newTele"), String.class);
+		String newStreet = new Gson().fromJson(request.getParameter("newStreet"), String.class);
+		String newCity = new Gson().fromJson(request.getParameter("newCity"), String.class);
+		String newState = new Gson().fromJson(request.getParameter("newState"), String.class);
+		String newZip = new Gson().fromJson(request.getParameter("newZip"), String.class);
+		
+		AddressEntry entry = new AddressEntry(Integer.parseInt(id), newName, newEmail, newTele, newStreet, newCity, newState, newZip);
+		
+		try {
+			addressDatabase = AddressDatabase.getInstance();
+			addressDatabase.updateAddress(Integer.parseInt(id), entry);
+			response.getWriter().write("{success:true}");			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
@@ -165,17 +205,6 @@ public class AddressesServletNew extends HttpServlet {
 	protected void doPut(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	}
-
-	/**
-	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
-	 */
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// TODO Auto-generated method stub
-		super.doDelete(request, response);
-
 	}
 
 }

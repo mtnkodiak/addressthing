@@ -121,7 +121,7 @@ function deleteEntry(id)
 	      'id': id
 	    },
 	    success: function(data) {
-	    	//alert(data);
+	    	alert(data);s
 	    	//populateAddressTable(data);
 	    },
 	    error: function(data) {

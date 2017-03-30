@@ -119,8 +119,10 @@ public class AddressesServletNew extends HttpServlet {
 		try {
 			addressDatabase = AddressDatabase.getInstance();
 			addressDatabase.deleteAddress(Integer.parseInt(id));
+			response.getWriter().write("{success:true}");			
 		} catch (Exception e) {
 			e.printStackTrace();
+			response.getWriter().write("{success:false}");
 		}
 	}
 

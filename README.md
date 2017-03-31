@@ -14,9 +14,11 @@ JSON (Gson)
 Eclipse
 
 Next steps in development:
-Error handling!  - error handling is very basic now.  Some exceptions are caught, but not handled very well.
-UI enhancements - the UI is very bare-bones.  Needs more CSS styling and polish.
-More tests - I started in my usual TDD fashion, but quickly ran out of time.  It needs a more complete testbed.
-Bug fixing - I could probably write up a dozen bugs right now that should be addressed.
+<ul>
+<li>Error handling!  - error handling is very basic now.  Some exceptions are caught, but not handled very well.</li>
+<li>UI enhancements - the UI is very bare-bones.  Needs more CSS styling and polish.</li>
+<li>More tests - I started in my usual TDD fashion, but quickly ran out of time.  It needs a more complete testbed.</li>
+<li>Bug fixing - I could probably write up a dozen bugs right now that should be addressed.</li>
+</ul>
 
 In all, I am glad I had the opportunity to build an app like this, and I learned a lot along the way.  Thank you!

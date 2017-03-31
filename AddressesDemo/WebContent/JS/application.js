@@ -15,7 +15,7 @@ $(document).ready(function() {
 			populateAddressTable(data);
 		},
 		error : function(data) {
-			alert('fail');
+			//alert('fail');
 		}
 	});
 	
@@ -75,7 +75,7 @@ function populateAddressTable(data) {
 }
 
 function editEntry(id) {
-	alert("editEntry called for row index " + id);
+	//alert("editEntry called for row index " + id);
 
 	// get current row values
 	var tableRows = document.getElementById("address_table").rows;
@@ -108,11 +108,11 @@ function editEntry(id) {
 		buttons : {
 			"Save" : updateUser,
 			Cancel : function() {
-				dialog.dialog("close");
+				editDialog.dialog("close");
 			}
 		},
 		close : function() {
-			form[0].reset();
+			//form[0].reset();
 			allFields.removeClass("ui-state-error");
 		}
 	});
@@ -151,14 +151,14 @@ function editEntry(id) {
 				'newZip' : JSON.stringify(newZip)
 			},
 			success : function(data) {
-				alert(data);
-				// populateAddressTable(data);
+				//alert(data);
 			},
 			error : function(data) {
-				alert('fail');
+				//alert('fail');
 			}
 		});
 
+		editDialog.dialog("close");
 	}
 }
 
@@ -188,14 +188,13 @@ function createUser() {
 			'newZip' : JSON.stringify(newZip)
 		},
 		success : function(data) {
-			alert(data);
-			// populateAddressTable(data);
+			//alert(data);
 		},
 		error : function(data) {
-			alert('fail');
+			//alert('fail');
 		}
 	});
-
+	createDialog.dialog("close");
 }
 
 function createNewEntry() {
@@ -207,18 +206,18 @@ function createNewEntry() {
 		buttons : {
 			"Save" : createUser,
 			Cancel : function() {
-				dialog.dialog("close");
+				createDialog.dialog("close");
 			}
 		},
 		close : function() {
-			form[0].reset();
+			//form[0].reset();
 			allFields.removeClass("ui-state-error");
 		}
 	});
 }
 
 function deleteEntry(id) {
-	alert("delete entry called for index " + id);
+	//alert("delete entry called for index " + id);
 
 	var dataIndex = document.getElementById(id + "id").innerHTML;
 
@@ -231,11 +230,11 @@ function deleteEntry(id) {
 			'id' : dataIndex
 		},
 		success : function(data) {
-			alert(data);
+			//alert(data);
 			// populateAddressTable(data);
 		},
 		error : function(data) {
-			alert('fail');
+			//alert('fail');
 		}
 	});
 }

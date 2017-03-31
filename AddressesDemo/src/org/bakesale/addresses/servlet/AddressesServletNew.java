@@ -24,13 +24,13 @@ import com.google.gson.Gson;
 public class AddressesServletNew extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private static final String CREATE_ADDRESS = "\"createAddress\"";
+	private static final String CREATE_ADDRESS = "createAddress";
 
-	private static final String LIST_ADDRESSES = "\"listAddresses\""; //TODO: why the extra quotes?
+	private static final String LIST_ADDRESSES = "listAddresses";
 
-	private static final String UPDATE_ADDRESS = "\"updateAddress\"";
+	private static final String UPDATE_ADDRESS = "updateAddress";
 
-	private static final String DELETE_ADDRESS = "\"deleteAddress\"";
+	private static final String DELETE_ADDRESS = "deleteAddress";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -57,10 +57,6 @@ public class AddressesServletNew extends HttpServlet {
 		{
 			
 		}
-		
-		
-		 //response.getWriter().append("Served at: ").append(request.getContextPath());
-
 	}
 
 	/**
@@ -82,7 +78,7 @@ public class AddressesServletNew extends HttpServlet {
 		response.setContentType("application/json");
 
 		if (request.getParameter("action") != null) {
-			String requestType = request.getParameter("action");
+			String requestType = new Gson().fromJson(request.getParameter("action"), String.class);
 			BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
 	        String jsonRequest = "";
 	        if(br != null){
@@ -104,10 +100,6 @@ public class AddressesServletNew extends HttpServlet {
 				break;
 			}
 		}
-		
-//		String jsonTest = new Gson().toJson("Hello friend!");
-//		response.getWriter().append(jsonTest);
-
 	}
 
 	private void getAddress(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, Exception {
@@ -193,10 +185,27 @@ public class AddressesServletNew extends HttpServlet {
 			throws ClassNotFoundException, IOException {
 		boolean success = true;
 
-		AddressDatabase db = AddressDatabase.getInstance();
-		// TODO: finish this
-		response.getWriter().write(new Gson().toJson(success));
+		String id = "-1"; //new Gson().fromJson(request.getParameter("id"), String.class);
+		String newName = new Gson().fromJson(request.getParameter("newName"), String.class);
+		String newEmail = new Gson().fromJson(request.getParameter("newEmail"), String.class);
+		String newTele = new Gson().fromJson(request.getParameter("newTele"), String.class);
+		String newStreet = new Gson().fromJson(request.getParameter("newStreet"), String.class);
+		String newCity = new Gson().fromJson(request.getParameter("newCity"), String.class);
+		String newState = new Gson().fromJson(request.getParameter("newState"), String.class);
+		String newZip = new Gson().fromJson(request.getParameter("newZip"), String.class);
+		
+		AddressEntry entry = new AddressEntry(Integer.parseInt(id), newName, newEmail, newTele, newStreet, newCity, newState, newZip);
+		
+		try {
+			AddressDatabase addressDatabase = AddressDatabase.getInstance();
+			addressDatabase.addAddress(entry);
+			
+			response.getWriter().write("{success:true}");			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
+		response.getWriter().write(new Gson().toJson(success));
 	}
 
 	/**

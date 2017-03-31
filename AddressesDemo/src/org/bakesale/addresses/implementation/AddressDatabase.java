@@ -42,10 +42,6 @@ public class AddressDatabase {
 		return dbInstance;
 	}
 
-	public void addAddresses(ArrayList<AddressEntry> addresses) {
-		addresses.addAll(addresses);
-	}
-
 	public List<AddressEntry> getAllAddresses() throws Exception {
 		String selectSql = "SELECT * FROM ADDRESSES_DATA";
 		ResultSet resultSet = dbConnector.doSelect(selectSql);
@@ -65,6 +61,25 @@ public class AddressDatabase {
 		return entries;
 	}
 
+	public boolean addAddress(AddressEntry entry) throws Exception
+	{
+		boolean success = true;
+		
+		
+		String insertSql = "INSERT INTO ADDRESSES_DATA VALUES ('" +
+		entry.getName() + "', '" +
+		entry.getEmail() + "', '" +
+		entry.getTelephone() + "', '" +
+		entry.getAddrStreet() + "', '" +
+		entry.getAddrCity() + "', '" +
+		entry.getAddrState() + "', '" +
+		entry.getZipcode() + "');";
+
+		dbConnector.doInsert(insertSql);
+		
+		return success;
+	}
+	
 	public boolean deleteAddress(int index) throws Exception {
 		boolean success = true;
 

@@ -2,23 +2,23 @@
  * 
  */
 
-// $(document).ready(function() {
-// populateAddressTable();
-// });
-$.ajax({
-	type : 'get',
-	url : 'AddressesServletNew',
-	dataType : 'JSON',
-	data : {
-		action : JSON.stringify("listAddresses")
-	},
-	success : function(data) {
-		// alert(data);
-		populateAddressTable(data);
-	},
-	error : function(data) {
-		alert('fail');
-	}
+$(document).ready(function() {
+	$.ajax({
+		type : 'get',
+		url : 'AddressesServletNew',
+		dataType : 'JSON',
+		data : {
+			action : JSON.stringify("listAddresses")
+		},
+		success : function(data) {
+			// alert(data);
+			populateAddressTable(data);
+		},
+		error : function(data) {
+			alert('fail');
+		}
+	});
+	
 });
 
 /**
@@ -28,8 +28,6 @@ $.ajax({
  * @returns
  */
 function populateAddressTable(data) {
-
-	// var servletUrl = "jdbc:postgresql://localhost:5432/addresses";
 
 	var displayHTML = "";
 	var i;
@@ -57,12 +55,13 @@ function populateAddressTable(data) {
 				+ parsedObject[i].addrState + '</td>';
 		var tdZip = '<td id="' + (i + 1) + 'zip">' + parsedObject[i].zipcode
 				+ '</td>';
-		var tdId = '<td style="display:none;" id="' + (i+1) + 'id">' + parsedObject[i].id + '</td>';
-		var tdButton = '<td><button isEditButton="true" id="'
-				+ (i+1) + 'editButton" onclick="editEntry('
-				+ (i+1) + ')">Edit</button> | <button id="'
-				+ (i+1) + 'deleteButton"  onclick="deleteEntry('
-				+ (i+1) + ')">Delete</button></td>';
+		var tdId = '<td style="display:none;" id="' + (i + 1) + 'id">'
+				+ parsedObject[i].id + '</td>';
+		var tdButton = '<td><button isEditButton="true" id="' + (i + 1)
+				+ 'editButton" onclick="editEntry(' + (i + 1)
+				+ ')">Edit</button> | <button id="' + (i + 1)
+				+ 'deleteButton"  onclick="deleteEntry(' + (i + 1)
+				+ ')">Delete</button></td>';
 
 		displayHTML += trElement + tdName + tdEmail + tdTele + tdStreet
 				+ tdCity + tdState + tdZip + tdButton + tdId + '</tr>';
@@ -89,8 +88,8 @@ function editEntry(id) {
 	var curState = document.getElementById(id + "state").innerHTML;
 	var curZip = document.getElementById(id + "zip").innerHTML;
 	var curId = document.getElementById(id + "id").innerHTML;
-	
-	//now stuff em into the edit dialog as default values
+
+	// now stuff em into the edit dialog as default values
 	document.getElementById("edit_name").value = curName;
 	document.getElementById("edit_email").value = curEmail;
 	document.getElementById("edit_telephone").value = curTele;
@@ -99,7 +98,7 @@ function editEntry(id) {
 	document.getElementById("edit_state").value = curState;
 	document.getElementById("edit_zip").value = curZip;
 	document.getElementById("edit_id").value = curId;
-	
+
 	// bring up dialog here to allow user to change values
 	editDialog = $("#edit-dialog-form").dialog({
 		autoOpen : true,
@@ -118,47 +117,14 @@ function editEntry(id) {
 		}
 	});
 
-	// form = dialog.find( "form" ).on( "submit", function( event ) {
-	// event.preventDefault();
-	// addUser();
-	// });
-
-//	$("#create-user").button().on("click", function() {
-//		dialog.dialog("open");
-//	});
-
-//	// send change request to database servlet
-//	$.ajax({
-//		type : 'get',
-//		url : 'AddressesServletNew',
-//		dataType : 'JSON',
-//		data : {
-//			'action' : JSON.stringify("updateAddress"),
-//			'id' : JSON.stringify(id),
-//			'newName' : JSON.stringify(newName),
-//			'newEmail' : JSON.stringify(newEmail),
-//			'newTele' : JSON.stringify(newTele),
-//			'newStreet' : JSON.stringify(Street),
-//			'newCity' : JSON.stringify(newCity),
-//			'newState' : JSON.stringify(newState),
-//			'newZip' : JSON.stringify(newZip)
-//		},
-//		success : function(data) {
-//			alert(data);
-//			// populateAddressTable(data);
-//		},
-//		error : function(data) {
-//			alert('fail');
-//		}
-//	});
-
 	/**
-	 * This is called after the user updates an entry's values using the popup & hits Save
+	 * updateUser() is called after the user updates an entry's values using the
+	 * popup & hits Save
 	 */
 	function updateUser() {
 		// send update to database
 
-		// get new values from update dialog's fields		
+		// get new values from update dialog's fields
 		var newName = document.getElementById("edit_name").value;
 		var newEmail = document.getElementById("edit_email").value;
 		var newTele = document.getElementById("edit_telephone").value;
@@ -166,8 +132,8 @@ function editEntry(id) {
 		var newCity = document.getElementById("edit_city").value;
 		var newState = document.getElementById("edit_state").value;
 		var newZip = document.getElementById("edit_zip").value;
-		var recordId =   document.getElementById("edit_id").value;
-		
+		var recordId = document.getElementById("edit_id").value;
+
 		// send change request to database servlet
 		$.ajax({
 			type : 'get',
@@ -194,36 +160,67 @@ function editEntry(id) {
 		});
 
 	}
-	// dialog = $("#dialog-form").dialog({
-	// autoOpen : false,
-	// height : 400,
-	// width : 350,
-	// modal : true,
-	// buttons : {
-	// "Save" : changeEntry,
-	// Cancel : function() {
-	// dialog.dialog("close");
-	// }
-	// },
-	// close : function() {
-	// form[0].reset();
-	// allFields.removeClass("ui-state-error");
-	// }
-	// });
-	//
-	// form = dialog.find("form").on("submit", function(event) {
-	// event.preventDefault();
-	// addUser();
-	// });
-	//
-	// $("#create-user").button().on("click", function() {
-	// dialog.dialog("open");
-	// });
-	//
+}
+
+function createUser() {
+	// create a new entry using values entered in the create popup.
+	var newName = document.getElementById("create_name").value;
+	var newEmail = document.getElementById("create_email").value;
+	var newTele = document.getElementById("create_telephone").value;
+	var newStreet = document.getElementById("create_street").value;
+	var newCity = document.getElementById("create_city").value;
+	var newState = document.getElementById("create_state").value;
+	var newZip = document.getElementById("create_zip").value;
+
+	// send change request to database servlet
+	$.ajax({
+		type : 'get',
+		url : 'AddressesServletNew',
+		dataType : 'JSON',
+		data : {
+			'action' : JSON.stringify("createAddress"),
+			'newName' : JSON.stringify(newName),
+			'newEmail' : JSON.stringify(newEmail),
+			'newTele' : JSON.stringify(newTele),
+			'newStreet' : JSON.stringify(newStreet),
+			'newCity' : JSON.stringify(newCity),
+			'newState' : JSON.stringify(newState),
+			'newZip' : JSON.stringify(newZip)
+		},
+		success : function(data) {
+			alert(data);
+			// populateAddressTable(data);
+		},
+		error : function(data) {
+			alert('fail');
+		}
+	});
+
+}
+
+function createNewEntry() {
+	createDialog = $("#create-dialog-form").dialog({
+		autoOpen : true,
+		height : 400,
+		width : 350,
+		modal : true,
+		buttons : {
+			"Save" : createUser,
+			Cancel : function() {
+				dialog.dialog("close");
+			}
+		},
+		close : function() {
+			form[0].reset();
+			allFields.removeClass("ui-state-error");
+		}
+	});
 }
 
 function deleteEntry(id) {
 	alert("delete entry called for index " + id);
+
+	var dataIndex = document.getElementById(id + "id").innerHTML;
 
 	$.ajax({
 		type : 'get',
@@ -231,11 +228,10 @@ function deleteEntry(id) {
 		dataType : 'JSON',
 		data : {
 			'action' : JSON.stringify("deleteAddress"),
-			'id' : id
+			'id' : dataIndex
 		},
 		success : function(data) {
 			alert(data);
-			s
 			// populateAddressTable(data);
 		},
 		error : function(data) {
@@ -243,45 +239,3 @@ function deleteEntry(id) {
 		}
 	});
 }
-
-// function changeEntry(id) {
-// alert("change entry called for index " + id);
-//
-// // get row values
-// var tableRows = document.getElementById("address_table").rows;
-//
-// var newName = document.getElementById(id + "name").value;
-// var newEmail = document.getElementById(id + "email").value;
-// var newTele = document.getElementById(id + "telephone").value;
-// var newStreet = document.getElementById(id + "street").value;
-// var newCity = document.getElementById(id + "city").value;
-// var newState = document.getElementById(id + "state").value;
-// var newZip = document.getElementById(id + "zip").value;
-//
-// // bring up dialog here to allow user to change values
-//
-// // send change request to database servlet
-// $.ajax({
-// type : 'get',
-// url : 'AddressesServletNew',
-// dataType : 'JSON',
-// data : {
-// 'action' : JSON.stringify("updateAddress"),
-// 'id' : JSON.stringify(id),
-// 'newName' : JSON.stringify(newName),
-// 'newEmail' : JSON.stringify(newEmail),
-// 'newTele' : JSON.stringify(newTele),
-// 'newStreet' : JSON.stringify(Street),
-// 'newCity' : JSON.stringify(newCity),
-// 'newState' : JSON.stringify(newState),
-// 'newZip' : JSON.stringify(newZip)
-// },
-// success : function(data) {
-// alert(data);
-// // populateAddressTable(data);
-// },
-// error : function(data) {
-// alert('fail');
-// }
-// });
-// }

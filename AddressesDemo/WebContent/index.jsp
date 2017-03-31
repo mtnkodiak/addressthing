@@ -13,11 +13,12 @@
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/dataTables.jqueryui.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="CSS/webui.css">
 
 <title>Addresses Database</title>
-
 
 </head>
 
@@ -32,7 +33,10 @@
 	<br>
 	<br>
 
-	<h2>Add New Entry:</h2>
+	<button id="create_button" onclick="createNewEntry();" title="Add New Address Entry">
+	Add New Address Entry
+	</button>
+	
 	<form id="new_address_form" style="display:none">
 		<div class="item text">
 			<label>Name:</label>
@@ -91,24 +95,50 @@
 		<input type="hidden" name="id_entry" value="0" />
 	</form>
 
+<!-- HIDDEN FORM ELEMENTS -->
 <div id="edit-dialog-form" title="Edit entry" style="display:none">
   <form>
     <fieldset>
-      <label for="edit-name">Name</label>
+      <label for="edit_name">Name</label>
       <input type="text" name="name" id="edit_name" class="text ui-widget-content ui-corner-all">
-      <label for="edit-email">Email</label>
+      <label for="edit_email">Email</label>
       <input type="text" name="email" id="edit_email" class="text ui-widget-content ui-corner-all">
-      <label for="edit-telephone">Telephone</label>
+      <label for="edit_telephone">Telephone</label>
       <input type="text" name="telephone" id="edit_telephone" class="text ui-widget-content ui-corner-all">
-      <label for="edit-street">Telephone</label>
+      <label for="edit_street">Street</label>
       <input type="text" name="street" id="edit_street" class="text ui-widget-content ui-corner-all">
-      <label for="edit-city">Telephone</label>
+      <label for="edit_city">City</label>
       <input type="text" name="city" id="edit_city" class="text ui-widget-content ui-corner-all">
-      <label for="edit-state">Telephone</label>
+      <label for="edit_state">State</label>
       <input type="text" name="state" id="edit_state" class="text ui-widget-content ui-corner-all">
-      <label for="edit-zip">Telephone</label>
+      <label for="edit_zip">ZipCode</label>
       <input type="text" name="zip" id="edit_zip" class="text ui-widget-content ui-corner-all">
       <input type="text" name="id" id="edit_id" style="display:none" class="text ui-widget-content ui-corner-all">
+ 
+      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+    </fieldset>
+  </form>
+</div>
+
+<div id="create-dialog-form" title="Create entry" style="display:none">
+  <form>
+    <fieldset>
+      <label for="create_name">Name</label>
+      <input type="text" name="name" id="create_name" class="text ui-widget-content ui-corner-all">
+      <label for="create_email">Email</label>
+      <input type="text" name="email" id="create_email" class="text ui-widget-content ui-corner-all">
+      <label for="create_telephone">Telephone</label>
+      <input type="text" name="telephone" id="create_telephone" class="text ui-widget-content ui-corner-all">
+      <label for="create_street">Street</label>
+      <input type="text" name="street" id="create_street" class="text ui-widget-content ui-corner-all">
+      <label for="create_city">City</label>
+      <input type="text" name="city" id="create_city" class="text ui-widget-content ui-corner-all">
+      <label for="create_state">State</label>
+      <input type="text" name="state" id="create_state" class="text ui-widget-content ui-corner-all">
+      <label for="create_zip">ZipCode</label>
+      <input type="text" name="zip" id="create_zip" class="text ui-widget-content ui-corner-all">
+      <input type="text" name="id" id="create_id" style="display:none" class="text ui-widget-content ui-corner-all">
  
       <!-- Allow form submission with keyboard without duplicating the dialog button -->
       <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
